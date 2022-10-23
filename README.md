@@ -9,24 +9,28 @@ These types of resources are supported:
 
 ## Usage
 
-providers.tf
+provider.tf
 ```hcl
 provider "aws" {
-  version = ">= 3.2.0"
   region = var.region
   allowed_account_ids = var.account_id
-  profile = "eks_service"
+  profile = "default"
 }
 ```
 
 terraform.tf
 ```hcl
 terraform {
-  required_version = ">= 0.13.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.36.0"
+    }
+  }
 }
 ```
 
-variables.tf
+variable.tf
 ```hcl
 variable "region" {
   description = "AWS Region"
